@@ -1,0 +1,23 @@
+{
+    "EventId": "{{ event_ID }}",
+    {% if metric %}
+    "Metric": "{{ metric }}",
+    {% else %}
+    "Metric": "0",
+    {% endif %}    
+    "Metadata": {
+        {% if element_name %}
+        "element_name": "{{ element_name }}",
+        {% endif %}
+        {% if severity %}
+        "severity": "{{ severity }}",
+        {% endif %}
+        {% if message %}
+        "message": "{{ message }}",
+        {% endif %}
+        "device_ID": "{{ device_ID }}"
+    },
+    "ApplicationId": "{{ Application_ID }}"
+}
+
+
