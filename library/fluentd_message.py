@@ -1,5 +1,4 @@
 import event
-import input_message
 import jinja2
 
 class FluentdMessage(event.Event):

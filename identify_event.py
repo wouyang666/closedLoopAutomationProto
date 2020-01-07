@@ -1,7 +1,7 @@
 import json
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), ".", "library"))
-import healthbot_message_interface,healthbot_event,appformix_message,fluentd_message
+import healthbot_event,fluentd_message
    
 def identify(message):
     try:
