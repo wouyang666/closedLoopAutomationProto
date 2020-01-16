@@ -14,6 +14,6 @@
       KAFKA_ZOOKEEPER_CONNECT: "{{ KAFKA_ZOOKEEPER_CONNECT }}"
       KAFKA_INTER_BROKER_LISTENER_NAME: "{{ KAFKA_INTER_BROKER_LISTENER_NAME }}"
     networks:
-      - name: "edi_default"
+      - name: "{{ networks }}"
     state: started
     restart: yes

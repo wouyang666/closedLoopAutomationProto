@@ -6,6 +6,6 @@
     exposed_ports:
       - "{{ exposed_ports }}"
     networks:
-      - name: "edi_default"
+      - name: "{{ networks }}"
     state: started
     restart: yes
