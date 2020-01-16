@@ -1,0 +1,11 @@
+---
+- name: deploy all
+  hosts:
+    - server_all
+  roles:
+    - deploy_zookeeper
+    - deploy_kafka
+    - deploy_elasticsearch
+    - deploy_kibana
+  connection: local
+  gather_facts: no

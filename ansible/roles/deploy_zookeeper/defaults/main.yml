@@ -1,0 +1,5 @@
+---
+container_name: "zookeeper"
+image_name: "wurstmeister/zookeeper"
+release: "3.4.6"
+exposed_ports: "2181"

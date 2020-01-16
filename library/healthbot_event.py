@@ -1,6 +1,4 @@
 import event
-import jinja2
-import datetime
 
 class HealthbotEvent(event.Event):
     #init method inherit from InputMessage
@@ -13,6 +11,9 @@ class HealthbotEvent(event.Event):
 
     def get_device_ID(self):
         return self.message["device-id"]
+
+    def get_device_type(self):
+        return "network"
 
     def get_severity(self):
         return self.message["severity"]
@@ -27,47 +28,8 @@ class HealthbotEvent(event.Event):
     def get_error_code(self):
         return self.message["trigger"]
 
-    def generate_output_message(self,output_message_type):
-        #j2_env = Environment(loader=PackageLoader("application_events", "templates"))
-        templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
-        j2_env = jinja2.Environment(loader=templateLoader)
-        j2_env.lstrip_blocks = True
-        j2_env.trim_blocks = True
-        if output_message_type == "appformix":
-            payload = j2_env.get_template("appformix_event_payload.j2").render(
-                event_ID = self.get_event_ID(),
-                element_name = self.get_element_name(),
-                Application_ID = "healthbot",
-                device_ID = self.get_device_ID(),
-                message = self.get_message(),
-                severity = self.get_severity()
-            )
-        # other output message format can be added
-        elif output_message_type == "app2":
-            print("to be added")
-
-        return payload
-
-    def format(self):
-        timeNow = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-        try:
-            new_message = {
-                "device_ID": self.get_device_ID(),
-                "device_type": "network",
-                "timestamp": timeNow,
-                "vendor": "Juniper",
-                "element_name" : self.get_element_name(),
-                "error_code": self.get_error_code(),
-                "error_message": self.get_message(),
-                "status": "new",
-                "action": "none",
-                "source": "healthbot",
-                "result": "none"
-            }
-            self.message = new_message
-        except:
-            print("exception happened")
-            raise
+    def get_source(self):
+        return "healthbot"
 
 """
     def convert_and_add_to_db(self):
