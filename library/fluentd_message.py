@@ -1,5 +1,5 @@
 import event
-import jinja2
+#import jinja2
 
 class FluentdMessage(event.Event):
 
@@ -20,7 +20,8 @@ class FluentdMessage(event.Event):
     def get_metric(self):
         return 0
 
-
+'''
+no longer needed
     def generate_output_message(self,output_message_type):
         #j2_env = Environment(loader=PackageLoader("application_events", "templates"))
         templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
@@ -41,7 +42,7 @@ class FluentdMessage(event.Event):
             print("to be added")
 
         return payload
-
+'''
 
 #the FluentdMessageJitter is based on the fix format of syslog that 
 #contains the rpm info from rpm-log.slax

@@ -1,2 +1,4 @@
-flask
 requests
+kafka-python
+elasticsearch
+junos-eznc

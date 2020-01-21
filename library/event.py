@@ -11,7 +11,7 @@ class Event:
         return self.source
 
     def saveToDB(self):
-        es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+        es = Elasticsearch([{'host': '100.123.34.0', 'port': 9200}])
         #use vars() to convert obj to dic and add to elasticsearch
         es.index(index=index_name, body = self.message)
         print("saved to Elastic")

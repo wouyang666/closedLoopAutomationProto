@@ -6,14 +6,14 @@ import time
 
 index_name = "test"
 def get_new_events():
-    es = Elasticsearch([{"host": "localhost", "port": 9200}])
+    es = Elasticsearch([{"host": "elasticsearch", "port": 9200}])
     es_result = es.search(index=index_name, body={"query": {"match": {"status":"new"}}})
     return(es_result)
 
 def update_event_status(event, action_name, result):
     event_id = event["_id"]
     print(event_id)
-    es = Elasticsearch([{"host": "localhost", "port": 9200}])
+    es = Elasticsearch([{"host": "elasticsearch", "port": 9200}])
     source_to_update = {
         "doc": {
             "status": "processed",
@@ -27,10 +27,13 @@ def update_event_status(event, action_name, result):
 
 
 while True:
-    new_events = get_new_events()
-    for event in new_events["hits"]["hits"]:
-        print(event)
-        action = analyze.decide_remidation_action(event["_source"])
-        result = action.run()
-        update_event_status(event, action.name, result)
+    try:
+        new_events = get_new_events()
+        for event in new_events["hits"]["hits"]:
+            print(event)
+            action = analyze.decide_remidation_action(event["_source"])
+            result = action.run()
+            update_event_status(event, action.name, result)
+    except Exception as e:
+        print(e)
     time.sleep(1)

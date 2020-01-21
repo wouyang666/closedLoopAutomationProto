@@ -1,0 +1,3 @@
+---
+container_name: "edi"
+image_name: "edi"

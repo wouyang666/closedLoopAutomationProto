@@ -1,6 +1,6 @@
-FROM python:alpine3.7
+FROM python:3
 COPY . /
-WORKDIR /application_events
+WORKDIR /edi
+RUN apt-get update && apt-get -y install gcc
 RUN pip3 install -r requirements.txt
-EXPOSE 10000
-CMD python3 -u ./event_service.py
+CMD python3 -u ./event_consumer.py >> event.log & python3 -u ./remediation.py >> remediation.log

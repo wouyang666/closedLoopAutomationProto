@@ -1,11 +1,18 @@
 ---
-- name: deploy all
+- name: deploy kafka, elasticsearch and kibana containers
   hosts:
-    - server_all
+    - server_kek
   roles:
     - deploy_zookeeper
     - deploy_kafka
     - deploy_elasticsearch
     - deploy_kibana
   connection: local
+  gather_facts: no
+
+- name: deploy event consumer and remediation server
+  hosts:
+    - server_event
+  roles:
+    - deploy_event
   gather_facts: no
