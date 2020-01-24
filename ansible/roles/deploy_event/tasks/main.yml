@@ -3,5 +3,10 @@
   docker_container:
     name: "{{ container_name }}"
     image: "{{ image_name }}"
+    env:
+      KAFKA_IP: "{{ KAFKA_IP }}"
+      KAFKA_PORT: "{{ KAFKA_PORT }}"
+      ELASTIC_IP: "{{ ELASTIC_IP }}"
+      ELASTIC_PORT: "{{ ELASTIC_PORT }}"
     state: started
     restart: yes

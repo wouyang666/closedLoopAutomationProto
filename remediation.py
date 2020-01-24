@@ -5,15 +5,18 @@ from elasticsearch import Elasticsearch
 import time
 
 index_name = "test"
+elastic_ip = os.environ.get("ELASTIC_IP")
+elastic_port = os.environ.get("ELASTIC_PORT")
+
 def get_new_events():
-    es = Elasticsearch([{"host": "elasticsearch", "port": 9200}])
+    es = Elasticsearch([{"host": elastic_ip, "port": elastic_port}])
     es_result = es.search(index=index_name, body={"query": {"match": {"status":"new"}}})
     return(es_result)
 
 def update_event_status(event, action_name, result):
     event_id = event["_id"]
     print(event_id)
-    es = Elasticsearch([{"host": "elasticsearch", "port": 9200}])
+    es = Elasticsearch([{"host": elastic_ip, "port": elastic_port}])
     source_to_update = {
         "doc": {
             "status": "processed",
