@@ -9,8 +9,8 @@ from email import encoders
 import os.path
 
 
-userid = "northstar"
-password = "Embe1mpls"
+userid = ""
+password = ""
 
 class Action:
     def __init__(self, event, name):
